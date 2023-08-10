@@ -39,7 +39,8 @@ h2 {
  .fiveday{
     display: column;
     justify-content: flex-end;
-    margin: 75px;
+    margin-right: 50px;
+   
 } 
 
  .border {
@@ -55,5 +56,9 @@ h2 {
     justify-content: space-around;
 }
 
+.border1 {
+    margin-left: 200px;
+    margin-top:50px;
+}
 
 
