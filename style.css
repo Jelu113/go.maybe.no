@@ -1,0 +1,19 @@
+.hero {
+    background-image: linear-gradient(rgb(251, 108, 108), rgb(249, 217, 61));   
+}
+
+.title {
+    color:white;
+    display: flex;
+    justify-content: center;
+}
+
+.subtitle {
+    display:flex;
+    justify-content: center;
+}
+
+.columns {
+    display:flex;
+    align-content: center;
+}
