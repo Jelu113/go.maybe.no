@@ -9,11 +9,53 @@
 }
 
 .subtitle {
-    display:flex;
+    display: flex;
     justify-content: center;
 }
 
 .columns {
-    display:flex;
+    display: flex;
     align-content: center;
 }
+.five {
+    /* justify-content: space-around; */
+    width: 150px; 
+    height: 200px;
+    margin:7px;
+}
+
+.search {
+    flex-direction: column;
+    width: 500px;
+    justify-content: center;
+
+}
+
+h2 {
+    font-size: 35px;
+    padding:15px;
+}
+
+ .fiveday{
+    display: column;
+    justify-content: space-around;
+} 
+
+ .border {
+     /* border: solid 2px black; */
+    /* width: 900px;
+    height: 350px; */
+    flex-direction: column;
+    justify-content: space-around;
+} 
+
+.h2heading {
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.rows {
+   flex-direction: row;
+   justify-content: space-around;
+}
+
