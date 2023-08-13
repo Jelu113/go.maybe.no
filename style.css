@@ -1,64 +1,25 @@
-.hero {
-    background-image: linear-gradient(rgb(251, 108, 108), rgb(249, 217, 61));   
+
+
+.city {
+  flex-direction: row;
+  
 }
 
-.title {
-    color:white;
-    display: flex;
-    justify-content: center;
+.search{
+  flex-direction: column; 
+  /* width:250px; */
+  /* margin-left:25px; */
 }
 
-.subtitle {
-    display: flex;
-    justify-content: center;
+.cityName{
+    width:800px;
+    border: solid 2px black;
 }
 
-.columns {
-    display: flex;
-    align-content: center;
-}
-.five {
-    /* justify-content: space-around; */
-    width: 150px; 
-    height: 200px;
-    margin:7px;
-}
-
-.search {
-    flex-direction: column;
-    width: 500px;
-    justify-content: center;
-
-}
-
-h2 {
-    font-size: 35px;
-    padding:15px;
-}
-
- .fiveday{
-    display: column;
+.five{
     justify-content: flex-end;
-    margin-right: 50px;
-   
-} 
+}
 
- .border {
-     /* border: solid 2px black; */
-    /* width: 900px;
-    height: 350px; */
+.fiveday {
     flex-direction: column;
-    justify-content:flex-end;
-} 
-
-.h2heading {
-    flex-direction: row;
-    justify-content: space-around;
 }
-
-.border1 {
-    margin-left: 200px;
-    margin-top:50px;
-}
-
-
