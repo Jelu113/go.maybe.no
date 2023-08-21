@@ -1,25 +1,38 @@
+hero{
 
-
-.city {
-  flex-direction: row;
-  
 }
 
+.city{
+    flex-direction: column;
+    margin-left: 200px;
+    
+}
 .search{
-  flex-direction: column; 
-  /* width:250px; */
-  /* margin-left:25px; */
+    flex-direction: column;
+    
 }
 
-.cityName{
-    width:800px;
-    border: solid 2px black;
+#input{ 
+    height: 40px;
+    width: 200px;
 }
+#sbutton{
+    height: 40px;
+    width:  200px;
+}
+
+ .cityName{
+    width:800px;
+    flex-direction: column;
+    border: solid 2px black;
+} 
 
 .five{
     justify-content: flex-end;
+    margin-right: 75px;
 }
 
 .fiveday {
     flex-direction: column;
+    margin-right:200px;
 }
