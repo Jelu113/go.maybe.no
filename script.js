@@ -5,35 +5,39 @@ var cityList = document.querySelector("#input");
 var lattitude = " ";
 var longitude = " ";
 
-
-localStorage.getItem(cityList, "cityName")
-
 function getApi() {
    var requestURLCity = "http://api.openweathermap.org/geo/1.0/direct?q=" + cityList.value + "&appid=" + ApiKey;
    fetch(requestURLCity)
-
       .then(function (response) {
-         console.log(response);
-         return response.json()
-         // displayJumbo(response)
+         return response.json();
       })
       .then(function (data) {
-         console.log(data)
-         lattitude = data[0].lat
-         longitude = data[0].lon
-         var requestURLLon = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lattitude + "&lon=" + longitude + "&appid=" + ApiKey;
-         
-         fetch(requestURLLon)
+         console.log(data);
+         lattitude = data[0].lat;
+         longitude = data[0].lon;
+         var cityNameFromAPI = data[0].name; // Store the city name from the geolocation API
 
+         var requestURLLon = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lattitude + "&lon=" + longitude + "&appid=" + ApiKey;
+
+         fetch(requestURLLon)
             .then(function (resp) {
-               return resp.json()
+               return resp.json();
             })
             .then(function (weatherData) {
-               console.log(weatherData)
-               displayWeather(weatherData)
-            })
+               console.log(weatherData);
+               displayWeather(cityNameFromAPI, weatherData);
+               addToSearchHistory(cityList.value);
+            });
       });
-};
+}
+
+function addToSearchHistory(city) {
+   var searchHistory =JSON.parse(localStorage.getItem("searchHistory")) || [];
+   if(!searchHistory.includes(city)) {
+      searchHistory.push(city);
+      localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
+   }
+}
 
 fetchButton.addEventListener("click", function (event) {
    event.preventDefault();
@@ -42,22 +46,37 @@ fetchButton.addEventListener("click", function (event) {
 console.log("button")
 // function(event)
 
-   // console.log(event)
-   // event.preventDefault{
+// console.log(event)
+// event.preventDefault{
 
-function displayWeather(weatherData){
-    let humidity = document.getElementById('humidity')
-    humidity.textContent = weatherData.list[0].main.humidity
+function displayWeather(cityName, weatherData) {
+   let cityNameElement = document.getElementById('cityName');
+   cityNameElement.textContent = cityName;
+
+   let temp = document.getElementById('temp');
+   
+   let tempFahrenheit = (weatherData.list[0].main.temp - 273.15) * 9/5 + 32;
+   temp.textContent = 'Temp: ' + tempFahrenheit.toFixed(2) + ' °F';
+
+   let wind = document.getElementById('wind');
+   wind.textContent = 'Wind: ' + weatherData.list[0].wind.speed;
+
+   let humidity = document.getElementById('humidity');
+   humidity.textContent = "Humidity: " + weatherData.list[0].main.humidity;
+
+   let dateElement = document.getElementById('date');
+   let todayDate = dayjs().format('MMMM D, YYYY');
+   dateElement.textContent = todayDate;
 
    //document.createElement('div')
-   let boxOne = document.createElement('div')
-   let textOne = document.createElement('p')
-   textOne.textContent = weatherData.list[0].main.humidity //need to change this to the day via API and create a for loop to add the 5 days. 
-   boxOne.appendChild(textOne); // look up syntax in my classwork on creating HTML dynamically
-   let first = document.querySelector('#first')
-   first.appendChild(boxOne) 
+   // let boxOne = document.createElement('div')
+   // let textOne = document.createElement('p')
+   // textOne.textContent = weatherData.list[0].main.humidity //need to change this to the day via API and create a for loop to add the 5 days. 
+   // boxOne.appendChild(textOne); // look up syntax in my classwork on creating HTML dynamically
+   // let first = document.querySelector('#first')
+   // first.appendChild(boxOne)
 
-   
+
 }
 
 //for loop to create 5 cards for the days. 

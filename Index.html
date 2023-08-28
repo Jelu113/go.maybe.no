@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather or not</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-    <link rel="stylesheet" href="style.css" >
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"/>
+    <link rel="stylesheet" href="style.css">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1.10.6/dayjs.min.js"></script>
 </head>
 
 <body>
@@ -26,18 +27,25 @@
         <div class="column is-flex city">
             <section class="column is-flex search">
                 <h2>Search for a city:</h2>
-                <input  id="input" type="text" placeholder="Location">
+                <input id="input" type="text" placeholder="Location">
                 <button class="button" id="sbutton">Search</button>
             </section>
         </div>
 
+        <div class='column search-history'>
+
+            <h2>Search History:</h2>
+            <ul id="history-list"></ul>
+        </div>
+
         <section class="columns is-flex fiveday">
-            <div class="container cityName"> container 1
+            <div class="container cityName">
                 <p id="cityName"></p>
+                <p id="temp"></p>
                 <p id="date"></p>
                 <p id="wind"></p>
-                <p id="humidity">Humidity:</p>
-                
+                <p id="humidity"></p>
+
             </div>
 
             <div class="is-flex columns ">
@@ -46,20 +54,20 @@
                         <h2>5-day forecast:</h2>
                     </section>
                     <div class="column is-flex">
-                        <div class="column box five" id ='first'>
+                        <div class="column box five" id="first">
+
+                        </div>
+                        <div class="column box five" id="second">
                             
                         </div>
-                        <div class="column box five">
-                            Second column
+                        <div class="column box five" id = "third">
+                            
                         </div>
-                        <div class="column box five">
-                            Third column
+                        <div class="column box five" id = "fourth">
+                            
                         </div>
-                        <div class="column box five">
-                            Fourth Column
-                        </div>
-                        <div class="column box five">
-                            Fifth
+                        <div class="column box five" id = "fifth">
+                            
                         </div>
                     </div>
                 </div>
@@ -67,7 +75,11 @@
         </section>
 
     </div>
-   <script src="./script.js"></script>
+    <script src="./script.js"></script>
+   
+<script>
+  dayjs().format()
+</script>
 </body>
 
 
