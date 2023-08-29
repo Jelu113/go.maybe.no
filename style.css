@@ -1,38 +1,49 @@
-hero{
+hero {}
 
-}
-
-.city{
+.city {
     flex-direction: column;
     margin-left: 200px;
     
-}
-.search{
-    flex-direction: column;
-    
+
 }
 
-#input{ 
+.search {
+    flex-direction: column;
+    width: 250px;
+}
+
+#input {
     height: 40px;
     width: 200px;
+    font-size: 20px;
 }
-#sbutton{
+
+#sbutton {
     height: 40px;
-    width:  200px;
+    width: 200px;
+    font-size: 20px;
+}
+.cityNew {
+    font-size:20px;
+}
+#cityName {
+    /* width:800px; */
+    /* flex-direction: column; */
+    font-size: 45px;
+    /* border: solid 2px black; */
 }
 
- .cityName{
-    width:800px;
-    flex-direction: column;
-    border: solid 2px black;
-} 
-
-.five{
+/* .five {
     justify-content: flex-end;
     margin-right: 75px;
-}
+} */
 
 .fiveday {
     flex-direction: column;
-    margin-right:200px;
+    
+ } 
+
+h2{
+    font-size: 20px;
+    font-weight: bold;
 }

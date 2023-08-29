@@ -15,7 +15,7 @@ function getApi() {
          console.log(data);
          lattitude = data[0].lat;
          longitude = data[0].lon;
-         var cityNameFromAPI = data[0].name; // Store the city name from the geolocation API
+         var cityNameFromAPI = data[0].name; 
 
          var requestURLLon = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lattitude + "&lon=" + longitude + "&appid=" + ApiKey;
 
@@ -31,11 +31,34 @@ function getApi() {
       });
 }
 
+function updateSearchHistoryUI(searchHistory) {
+   var historyList = document.getElementById("history-list");
+   historyList.innerHTML = ""; 
+
+   
+   searchHistory.forEach(function (city) {
+      var historyItem = document.createElement("li");
+      historyItem.classList.add("history-item");
+      historyItem.textContent = city;
+
+      
+      historyItem.addEventListener("click", function () {
+         displayWeatherForCity(city);
+      });
+
+      historyList.appendChild(historyItem);
+   });
+}
+
 function addToSearchHistory(city) {
    var searchHistory =JSON.parse(localStorage.getItem("searchHistory")) || [];
+
    if(!searchHistory.includes(city)) {
       searchHistory.push(city);
+
       localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
+
+      updateSearchHistoryUI(searchHistory);
    }
 }
 
@@ -44,7 +67,7 @@ fetchButton.addEventListener("click", function (event) {
    getApi()
 });
 console.log("button")
-// function(event)
+
 
 // console.log(event)
 // event.preventDefault{
@@ -67,17 +90,19 @@ function displayWeather(cityName, weatherData) {
    let dateElement = document.getElementById('date');
    let todayDate = dayjs().format('MMMM D, YYYY');
    dateElement.textContent = todayDate;
+}
+
 
    //document.createElement('div')
-   // let boxOne = document.createElement('div')
-   // let textOne = document.createElement('p')
-   // textOne.textContent = weatherData.list[0].main.humidity //need to change this to the day via API and create a for loop to add the 5 days. 
-   // boxOne.appendChild(textOne); // look up syntax in my classwork on creating HTML dynamically
+   // let box = document.createElement('div')
+   // let text = document.createElement('p')
+   // text.textContent = weatherData.list[0].main.dt_txt //need to change this to the day via API and create a for loop to add the 5 days. 
+   // box.appendChild(textOne); // look up syntax in my classwork on creating HTML dynamically
    // let first = document.querySelector('#first')
-   // first.appendChild(boxOne)
+   // first.appendChild(box)
 
 
-}
+
 
 //for loop to create 5 cards for the days. 
 // function displayWeather(weather){ }  weather.temp weather.humidity etc...
