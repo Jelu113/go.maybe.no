@@ -23,22 +23,60 @@
         </div>
     </header>
     <section class="columns is-flex fiveday">
-        <div class="columns is-flex ">
-            <div class="column is-flex city">
+         <div class="column is-flex">
+<!-- ... (other HTML code) -->
+
+<div class="column is-flex city">
+    <div class="search-container"> <!-- Common parent container -->
+        <section class="column is-flex search">
+            <h2>Search for a city:</h2>
+            <input id="input" type="text" placeholder="Location">
+            <button class="button" id="sbutton">Search</button>
+        </section>
+        <div class="container column cityNew">
+            <p id="cityName"></p>
+            <p id="date"></p>
+            <p id="temp"></p>
+            <p id="wind"></p>
+            <p id="humidity"></p>
+        </div>
+    </div>
+    <div class="search-history">
+        <h2>Search History:</h2>
+        <ul id="history-list"></ul>
+    </div>
+</div>
+
+
+<!-- ... (other HTML code) -->
+
+
+
+            <!-- <div class="column is-flex city">
                 <section class="column is-flex search">
                     <h2>Search for a city:</h2>
                     <input id="input" type="text" placeholder="Location">
                     <button class="button" id="sbutton">Search</button>
                 </section>
+                <div>
 
-                <div class='column search-history'>
+                    <div class="container column cityNew">
+                        <p id="cityName"></p>
+                        <p id="date"></p>
+                        <p id="temp"></p>
+                        <p id="wind"></p>
+                        <p id="humidity"></p>
+    
+                    </div>
+                </div> -->
+                <!-- <div class='column search-history'>
 
                     <h2>Search History:</h2>
                     <ul id="history-list"></ul>
                 </div>
             </div>
-
-            <div>
+         </div> -->
+            <!-- <div>
 
                 <div class="container column cityNew">
                     <p id="cityName"></p>
@@ -48,14 +86,14 @@
                     <p id="humidity"></p>
 
                 </div>
-            </div>
+            </div> -->
         </div>
         <div class="is-flex columns ">
             <div class="column">
                 <section class="column is-flex">
                     <h2>5-day forecast:</h2>
                 </section>
-                <div class="column is-flex">
+                <div class="column is-flex" id="forecast-container">
                     <div class="column box five" id="first">
 
                     </div>
