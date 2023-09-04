@@ -6,7 +6,7 @@ var lattitude = " ";
 var longitude = " ";
 //requesting API
 function getApi() {
-   var requestURLCity = "http://api.openweathermap.org/geo/1.0/direct?q=" + cityList.value + "&appid=" + ApiKey;
+   var requestURLCity = "http://api.openweathermap.org/geo/1.0/direct?q=" + cityList.value + "&appid=" + ApiKey + "&units=imperial";
    fetch(requestURLCity)
       .then(function (response) {
          return response.json();
@@ -17,7 +17,7 @@ function getApi() {
          longitude = data[0].lon;
          var cityNameFromAPI = data[0].name; 
 
-         var requestURLLon = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lattitude + "&lon=" + longitude + "&appid=" + ApiKey;
+         var requestURLLon = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lattitude + "&lon=" + longitude + "&appid=" + ApiKey + "&units=imperial";
 
          fetch(requestURLLon)
             .then(function (resp) {
@@ -27,16 +27,17 @@ function getApi() {
                console.log(weatherData);
                displayWeather(cityNameFromAPI, weatherData);
                addToSearchHistory(cityList.value);
+               fiveDay(weatherData);
             });
       });
+   
 }
-// Add this function at the beginning of your JavaScript code
+
 function loadSearchHistory() {
    var searchHistory = JSON.parse(localStorage.getItem("searchHistory")) || [];
    updateSearchHistoryUI(searchHistory);
  }
  
- // Call the function when the page loads
  window.addEventListener("load", loadSearchHistory);
  
 function updateSearchHistoryUI(searchHistory) {
@@ -60,29 +61,16 @@ function updateSearchHistoryUI(searchHistory) {
 function addToSearchHistory(city) {
    var searchHistory = JSON.parse(localStorage.getItem("searchHistory")) || [];
    
-   // Ensure only the last 5 searches are stored
    if (searchHistory.length >= 5) {
-     searchHistory.pop(); // Remove the oldest search
+     searchHistory.pop(); 
    }
- 
-   // Add the newest search to the top
+
    searchHistory.unshift(city);
  
    localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
    updateSearchHistoryUI(searchHistory);
  }
  
-// function addToSearchHistory(city) {
-   // var searchHistory =JSON.parse(localStorage.getItem("searchHistory")) || [];
-
-   // if(!searchHistory.includes(city)) {
-   //    searchHistory.push(city);
-
-   //    localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
-
-   //    updateSearchHistoryUI(searchHistory);
-   // }
-// }
 
 fetchButton.addEventListener("click", function (event) {
    event.preventDefault();
@@ -91,8 +79,7 @@ fetchButton.addEventListener("click", function (event) {
 console.log("button")
 
 
-// console.log(event)
-// event.preventDefault{
+
 
 function displayWeather(cityName, weatherData) {
    let cityNameElement = document.getElementById('cityName');
@@ -100,8 +87,8 @@ function displayWeather(cityName, weatherData) {
 
    let temp = document.getElementById('temp');
    
-   let tempFahrenheit = (weatherData.list[0].main.temp - 273.15) * 9/5 + 32;
-   temp.textContent = 'Temp: ' + tempFahrenheit.toFixed(2) + ' °F';
+   let tempFahrenheit = weatherData.list[0].main.temp
+   temp.textContent = 'Temp: ' + tempFahrenheit + ' °F';
 
    let wind = document.getElementById('wind');
    wind.textContent = 'Wind: ' + weatherData.list[0].wind.speed;
@@ -112,4 +99,21 @@ function displayWeather(cityName, weatherData) {
    let dateElement = document.getElementById('date');
    let todayDate = dayjs().format('MMMM D, YYYY');
    dateElement.textContent = todayDate;
+}
+
+function fiveDay(weatherData){
+   let first = document.getElementById('first');
+   let second = document.getElementById('second');
+   let third = document.getElementById('third');
+   let fourth= document.getElementById('fourth');
+   let fifth = document.getElementById('fifth');
+
+
+
+   for (let i = 0; i < weatherData.list.length; i += 8) {
+      console.log(i)
+      console.log (weatherData.list[i].dt_txt)
+
+   }
+
 }
