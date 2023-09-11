@@ -79,8 +79,6 @@ fetchButton.addEventListener("click", function (event) {
 console.log("button")
 
 
-
-
 function displayWeather(cityName, weatherData) {
    let cityNameElement = document.getElementById('cityName');
    cityNameElement.textContent = cityName;
