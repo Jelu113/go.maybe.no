@@ -61,3 +61,15 @@ h2{
 .search-history {
     margin-top: 20px;
 }
+
+#forecast-container {
+    display:flex;
+    justify-content: space-between;
+}
+
+.forecast-box {
+    border: 1px solid black;
+    padding: 10px;
+    margin: 5px;
+    box-sizing: border-box;
+}

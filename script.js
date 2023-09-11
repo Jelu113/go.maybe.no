@@ -15,7 +15,7 @@ function getApi() {
          console.log(data);
          lattitude = data[0].lat;
          longitude = data[0].lon;
-         var cityNameFromAPI = data[0].name; 
+         var cityNameFromAPI = data[0].name;
 
          var requestURLLon = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lattitude + "&lon=" + longitude + "&appid=" + ApiKey + "&units=imperial";
 
@@ -30,27 +30,27 @@ function getApi() {
                fiveDay(weatherData);
             });
       });
-   
+
 }
 
 function loadSearchHistory() {
    var searchHistory = JSON.parse(localStorage.getItem("searchHistory")) || [];
    updateSearchHistoryUI(searchHistory);
- }
- 
- window.addEventListener("load", loadSearchHistory);
- 
+}
+
+window.addEventListener("load", loadSearchHistory);
+
 function updateSearchHistoryUI(searchHistory) {
    var historyList = document.getElementById("history-list");
-   historyList.innerHTML = ""; 
+   historyList.innerHTML = "";
 
-   
+
    searchHistory.forEach(function (city) {
       var historyItem = document.createElement("li");
       historyItem.classList.add("history-item");
       historyItem.textContent = city;
 
-      
+
       historyItem.addEventListener("click", function () {
          displayWeatherForCity(city);
       });
@@ -60,17 +60,17 @@ function updateSearchHistoryUI(searchHistory) {
 }
 function addToSearchHistory(city) {
    var searchHistory = JSON.parse(localStorage.getItem("searchHistory")) || [];
-   
+
    if (searchHistory.length >= 5) {
-     searchHistory.pop(); 
+      searchHistory.pop();
    }
 
    searchHistory.unshift(city);
- 
+
    localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
    updateSearchHistoryUI(searchHistory);
- }
- 
+}
+
 
 fetchButton.addEventListener("click", function (event) {
    event.preventDefault();
@@ -86,7 +86,7 @@ function displayWeather(cityName, weatherData) {
    cityNameElement.textContent = cityName;
 
    let temp = document.getElementById('temp');
-   
+
    let tempFahrenheit = weatherData.list[0].main.temp
    temp.textContent = 'Temp: ' + tempFahrenheit + ' °F';
 
@@ -101,19 +101,36 @@ function displayWeather(cityName, weatherData) {
    dateElement.textContent = todayDate;
 }
 
-function fiveDay(weatherData){
-   let first = document.getElementById('first');
-   let second = document.getElementById('second');
-   let third = document.getElementById('third');
-   let fourth= document.getElementById('fourth');
-   let fifth = document.getElementById('fifth');
+function fiveDay(weatherData) {
+   let forecastContainer = document.getElementById("forecast-container");
+   forecastContainer.innerHTML = ""; // Clear previous content
 
+   for (let i = 0; i < 5; i++) {
+      let forecastDay = weatherData.list[i * 8]; // Data for each day is at every 8th index
 
+      // Create a box for each day
+      let dayBox = document.createElement("div");
+      dayBox.classList.add("forecast-box");
 
-   for (let i = 0; i < weatherData.list.length; i += 8) {
-      console.log(i)
-      console.log (weatherData.list[i].dt_txt)
+      // Create elements to display the data
+      let dateElement = document.createElement("p");
+      let tempElement = document.createElement("p");
+      let windElement = document.createElement("p");
+      let humidityElement = document.createElement("p");
 
+      // Set the content for each element
+      dateElement.textContent = dayjs(forecastDay.dt_txt).format("MMM D");
+      tempElement.textContent = "Temp: " + forecastDay.main.temp + " °F";
+      windElement.textContent = "Wind: " + forecastDay.wind.speed + " mph";
+      humidityElement.textContent = "Humidity: " + forecastDay.main.humidity + "%";
+
+      // Append elements to the dayBox
+      dayBox.appendChild(dateElement);
+      dayBox.appendChild(tempElement);
+      dayBox.appendChild(windElement);
+      dayBox.appendChild(humidityElement);
+
+      // Append the dayBox to the forecastContainer
+      forecastContainer.appendChild(dayBox);
    }
-
 }
