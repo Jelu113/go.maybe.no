@@ -1,4 +1,6 @@
-
+.hero {
+    background-image: linear-gradient(to bottom left, red, yellow);
+}
 
 .city {
     flex-direction: column;
